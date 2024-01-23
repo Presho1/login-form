@@ -9,31 +9,31 @@
 <body>
     <div class="container">
         <div class="title">Registration</div>
-        <form action="#" >
+        <form id="form" >
             <div class="user-details">
                 <div class="input-box ">
-                    <label for="inputFullName" class="details">Full Name</label>
-                    <input type="text" placeholder="Enter your fullname" required aria-label="First name"/>
+                    <label class="details">Full Name</label>
+                    <input name="fullname" type="text" placeholder="Enter your fullname" required aria-label="First name"/>
                 </div>
                 <div class="input-box">
-                    <label for="inputPhoneNumber" class="details">Phone Number</label>
-                    <input type="text"  placeholder="Enter your phone number" required aria-label="Last name" />
+                    <label class="details">Phone Number</label>
+                    <input name="phonenumber" type="text"  placeholder="Enter your phone number" required aria-label="Last name" />
                 </div>
                 <div class="input-box">
-                    <label for="inputEmail" class="details">Email</label>
-                    <input type="email"  placeholder="Enter your email" required />
+                    <label class="details">Email</label>
+                    <input name="email" type="email"  placeholder="Enter your email" required />
                 </div>
                 <div class="input-box">
-                    <label for="inputAddress" class="details">Address</label>
-                    <input type="text"  placeholder="Enter your address" required />
+                    <label class="details">Address</label>
+                    <input name="address" type="text"  placeholder="Enter your address" required />
                 </div>
                 <div class="input-box">
-                    <label for="inputState" class="details">State</label>
-                    <input type="text" placeholder="Enter your state" required>
+                    <label class="details">State</label>
+                    <input name="state" type="text" placeholder="Enter your state" required>
                 </div>
                 <div class="input-box">
-                    <label for="inputPassword" class="details">Password</label>
-                    <input type="password"  placeholder="Enter your password" required />
+                    <label class="details">Password</label>
+                    <input name="password" type="password"  placeholder="Enter your password" required />
                 </div>
             </div>
             <div class="button">
@@ -42,4 +42,35 @@
         </form>
     </div>
 </body>
+
+<script>
+    const form = document.getElementById('form');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+
+        fetch('https://jsonplaceholder.typicode.com/posts',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+         }).then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
+    
+    });
+
+ 
+
+</script>
+
+
+
+
 </html>
